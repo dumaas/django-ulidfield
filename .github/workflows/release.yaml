@@ -15,28 +15,9 @@ permissions:
 jobs:
   bump-version:
     runs-on: ubuntu-latest
-    #if: github.event.pull_request.merged == true
+    if: github.event.pull_request.merged == true
     steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: ${{ github.head_ref }}
-
-      - name: Set up Python 3.9
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.9"
-
-      - name: Install Poetry
-        uses: abatilo/actions-poetry@v4
-
-      - uses: actions/cache@v4
-        name: Define cache
-        with:
-          path: ./.venv
-          key: venv-${{ hashFiles('poetry.lock') }}
-
-      - name: Install the project dependencies
-        run: poetry install --no-root
+      - uses: ./.github/workflows/build.yaml
 
       - name: Bump version
         run: poetry version patch
@@ -46,27 +27,9 @@ jobs:
 
   generate-release:
     runs-on: ubuntu-latest
-    #if: github.event.pull_request.merged == true
     needs: bump-version
     steps:
-      - uses: actions/checkout@v4
-
-      - name: Set up Python 3.9
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.9"
-
-      - name: Install Poetry
-        uses: abatilo/actions-poetry@v4
-
-      - uses: actions/cache@v4
-        name: Define cache
-        with:
-          path: ./.venv
-          key: venv-${{ hashFiles('poetry.lock') }}
-
-      - name: Install the project dependencies
-        run: poetry install --no-root
+      - uses: ./.github/workflows/build.yaml
 
       - name: Generate release
         run: |
@@ -77,30 +40,12 @@ jobs:
 
   publish:
     runs-on: ubuntu-latest
-    #if: github.event.pull_request.merged == true
     needs: generate-release
     environment:
       name: pypi
       url: https://pypi.org/project/django-ulidfield/
     steps:
-      - uses: actions/checkout@v4
-
-      - name: Set up Python 3.9
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.9"
-
-      - name: Install Poetry
-        uses: abatilo/actions-poetry@v4
-
-      - uses: actions/cache@v4
-        name: Define cache
-        with:
-          path: ./.venv
-          key: venv-${{ hashFiles('poetry.lock') }}
-
-      - name: Install the project dependencies
-        run: poetry install --no-root
+      - uses: ./.github/workflows/build.yaml
 
       - name: Publish to PyPI
         run: |

@@ -12,24 +12,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
-
-    - name: Set up Python 3.9
-      uses: actions/setup-python@v5
-      with:
-        python-version: "3.9"
-
-    - name: Install Poetry
-      uses: abatilo/actions-poetry@v4
-
-    - uses: actions/cache@v4
-      name: Define cache
-      with:
-        path: ./.venv
-        key: venv-${{ hashFiles('poetry.lock') }}
-
-    - name: Install the project dependencies
-      run: poetry install
+    - uses: ./.github/workflows/build.yaml
 
     - name: Unit test
       run: poetry run pytest -v
