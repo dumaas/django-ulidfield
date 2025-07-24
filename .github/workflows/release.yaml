@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event.pull_request.merged == true
     steps:
-      - uses: ./.github/workflows/build.yaml
+      - uses: ./.github/actions/build
 
       - name: Bump version
         run: poetry version patch
@@ -29,7 +29,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: bump-version
     steps:
-      - uses: ./.github/workflows/build.yaml
+      - uses: ./.github/actions/build
 
       - name: Generate release
         run: |
@@ -45,7 +45,7 @@ jobs:
       name: pypi
       url: https://pypi.org/project/django-ulidfield/
     steps:
-      - uses: ./.github/workflows/build.yaml
+      - uses: ./.github/actions/build
 
       - name: Publish to PyPI
         run: |
