@@ -1,6 +1,6 @@
 [project]
 name = "django-ulidfield"
-version = "0.1.0"
+version = "0.1.1"
 description = "A drop-in Django model field for storing sortable, time-encoded ULIDs as 26-character strings."
 authors = [
     {name = "Christian Gonzalez",email = "christiangonzalezblack@gmail.com"}
