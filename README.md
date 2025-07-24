@@ -2,6 +2,7 @@
 [![CI](https://github.com/dumaas/django-ulidfield/actions/workflows/test.yaml/badge.svg)](https://github.com/dumaas/django-ulidfield/actions/workflows/test.yaml)
 [![License](https://img.shields.io/github/license/dumaas/django-ulidfield)](LICENSE)
 [![Docs](https://readthedocs.org/projects/django-ulidfield/badge/?version=latest)](https://django-ulidfield.readthedocs.io/en/latest/)
+[![Published on Django Packages](https://img.shields.io/badge/Published%20on-Django%20Packages-0c3c26)](https://djangopackages.org/packages/p/django-ulidfield/)
 
 # django-ulidfield
 
