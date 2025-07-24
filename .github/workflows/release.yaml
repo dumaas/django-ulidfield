@@ -19,7 +19,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: ./.github/actions/build
+      - uses: ./.github/actions/build_image
 
       - name: Bump version
         run: poetry version patch
@@ -33,7 +33,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: ./.github/actions/build
+      - uses: ./.github/actions/build_image
 
       - name: Generate release
         run: |
@@ -51,7 +51,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: ./.github/actions/build
+      - uses: ./.github/actions/build_image
 
       - name: Publish to PyPI
         run: |
