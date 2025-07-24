@@ -2,7 +2,7 @@ site_name: django-ulidfield
 repo_url: https://github.com/dumaas/django-ulidfield
 site_url: https://django-ulidfield.readthedocs.io
 theme:
-  name: material
+  name: readthedocs
 
 nav:
   - Home: index.md
