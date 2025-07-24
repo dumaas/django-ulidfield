@@ -67,6 +67,8 @@ jobs:
         run: |
           VERSION=$(poetry version -s)
           gh release create "v$VERSION" --fail-on-no-commits --generate-notes
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   publish:
     runs-on: ubuntu-latest
