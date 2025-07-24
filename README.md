@@ -1,3 +1,8 @@
+[![PyPI version](https://img.shields.io/pypi/v/django-ulidfield.svg)](https://pypi.org/project/django-ulidfield/)
+[![CI](https://github.com/dumaas/django-ulidfield/actions/workflows/test.yaml/badge.svg)](https://github.com/dumaas/django-ulidfield/actions/workflows/test.yaml)
+[![License](https://img.shields.io/github/license/dumaas/django-ulidfield)](LICENSE)
+[![Docs](https://readthedocs.org/projects/django-ulidfield/badge/?version=latest)](https://django-ulidfield.readthedocs.io/en/latest/)
+
 # django-ulidfield
 
 A drop-in Django model field for storing sortable, time-encoded ULIDs as 26-character strings.

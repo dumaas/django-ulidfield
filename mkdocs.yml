@@ -1,0 +1,15 @@
+site_name: django-ulidfield
+repo_url: https://github.com/dumaas/django-ulidfield
+site_url: https://django-ulidfield.readthedocs.io
+theme:
+  name: material
+
+nav:
+  - Home: index.md
+
+markdown_extensions:
+  - toc:
+      permalink: true
+  - admonition
+  - codehilite
+  - pymdownx.superfences
