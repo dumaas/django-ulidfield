@@ -1,0 +1,57 @@
+name: Release
+
+on:
+  pull_request:
+    types:
+      - closed
+
+permissions:
+  id-token: write
+  contents: write
+
+jobs:
+  bump-version:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ./.github/actions/build_image
+
+      - name: Bump version
+        run: poetry version patch
+
+      - uses: stefanzweifel/git-auto-commit-action@v6
+        name: Commit changes
+
+  generate-release:
+    runs-on: ubuntu-latest
+    needs: bump-version
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ./.github/actions/build_image
+
+      - name: Generate release
+        run: |
+          VERSION=$(poetry version -s)
+          gh release create "v$VERSION" --fail-on-no-commits --generate-notes
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  publish:
+    runs-on: ubuntu-latest
+    needs: generate-release
+    environment:
+      name: pypi
+      url: https://pypi.org/project/django-ulidfield/
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ./.github/actions/build_image
+
+      - name: Publish to PyPI
+        run: |
+          poetry publish --build \
+          --username __token__ \
+          --password ${{ secrets.PYPI_API_TOKEN }}
