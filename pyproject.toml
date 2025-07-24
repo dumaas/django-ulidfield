@@ -16,6 +16,44 @@ dependencies = [
 [tool.poetry]
 packages = [{include = "django_ulidfield", from = "src"}]
 
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.4.1"
+pytest-django = "^4.11.1"
+pre-commit = "^4.2.0"
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "tests.settings"
+python_files = ["test_*.py", "*_test.py"]
+pythonpath = ["src", "."]
+
+[tool.ruff]
+target-version = "py39"
+line-length = 88
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes
+    "I",   # isort
+    "B",   # flake8-bugbear
+    "C4",  # flake8-comprehensions
+    "DJ",  # flake8-django
+    "UP",  # pyupgrade
+]
+ignore = [
+    "E501",  # line too long (handled by formatter)
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*.py" = ["DJ01", "DJ008"]  # Allow non-model classes in tests and skip __str__ requirement
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]

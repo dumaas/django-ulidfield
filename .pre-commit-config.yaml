@@ -1,0 +1,23 @@
+repos:
+  # Pre-commit hooks for general file cleanup
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-toml
+      - id: check-merge-conflict
+      - id: check-added-large-files
+      - id: check-case-conflict
+      - id: check-ast
+
+  # Ruff for linting and formatting (replaces black, isort, flake8, etc.)
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.12.4
+    hooks:
+      # Run the linter
+      - id: ruff
+        args: [--fix]
+      # Run the formatter (replaces black)
+      - id: ruff-format
