@@ -1,0 +1,42 @@
+name: Test
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.9"
+
+    - name: Install Poetry
+      uses: abatilo/actions-poetry@v4
+
+    - uses: actions/cache@v4
+      name: Define cache
+      with:
+        path: ./.venv
+        key: venv-${{ hashFiles("poetry.lock") }}
+
+    - name: Install the project dependencies
+      run: poetry install
+
+    - name: Lint
+      run: |
+        # stop the build if there are Python syntax errors or undefined names
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
+        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+
+    - name: Unit test
+      run: poetry run pytest -v
