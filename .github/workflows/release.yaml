@@ -18,8 +18,6 @@ jobs:
     if: github.event.pull_request.merged == true
     steps:
       - uses: actions/checkout@v4
-        with:
-          ref: ${{ github.head_ref }}
 
       - uses: ./.github/actions/build
 
@@ -34,8 +32,6 @@ jobs:
     needs: bump-version
     steps:
       - uses: actions/checkout@v4
-        with:
-          ref: ${{ github.head_ref }}
 
       - uses: ./.github/actions/build
 
@@ -54,8 +50,6 @@ jobs:
       url: https://pypi.org/project/django-ulidfield/
     steps:
       - uses: actions/checkout@v4
-        with:
-          ref: ${{ github.head_ref }}
 
       - uses: ./.github/actions/build
 
