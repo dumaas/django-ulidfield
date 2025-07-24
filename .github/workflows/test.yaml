@@ -26,7 +26,7 @@ jobs:
       name: Define cache
       with:
         path: ./.venv
-        key: venv-${{ hashFiles("poetry.lock") }}
+        key: venv-${{ hashFiles('poetry.lock') }}
 
     - name: Install the project dependencies
       run: poetry install
