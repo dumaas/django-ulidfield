@@ -4,7 +4,7 @@ on:
   push:
     branches-ignore:
       - main
-  pull_request:
+  #pull_request:
     #types:
     #  - closed
 
@@ -18,6 +18,8 @@ jobs:
     #if: github.event.pull_request.merged == true
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
 
       - name: Set up Python 3.9
         uses: actions/setup-python@v5
@@ -38,6 +40,9 @@ jobs:
 
       - name: Bump version
         run: poetry version patch
+
+      - uses: stefanzweifel/git-auto-commit-action@v6
+        name: Commit changes
 
   generate-release:
     runs-on: ubuntu-latest
