@@ -38,15 +38,8 @@ jobs:
       - name: Install the project dependencies
         run: poetry install --no-root
 
-      - name: Publish to TestPyPI
+      - name: Publish to PyPI
         run: |
           poetry publish --build \
           --username __token__ \
-          --password ${{ secrets.TEST_PYPI_API_TOKEN  }} \
-          --repository https://test.pypi.org/legacy/
-
-      #- name: Publish to PyPI
-      #  run: |
-      #    poetry publish --build \
-      #    --username __token__ \
-      #    --password ${{ secrets.PYPI_API_TOKEN }}
+          --password ${{ secrets.PYPI_API_TOKEN }}
