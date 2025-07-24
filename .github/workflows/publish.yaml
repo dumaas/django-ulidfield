@@ -43,7 +43,7 @@ jobs:
           poetry publish --build \
           --username __token__ \
           --password ${{ secrets.TEST_PYPI_API_TOKEN  }} \
-          --repository-url https://test.pypi.org/legacy/
+          --repository https://test.pypi.org/legacy/
 
       #- name: Publish to PyPI
       #  run: |
